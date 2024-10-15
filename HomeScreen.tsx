@@ -1,31 +1,10 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { toggleCompleteToDo } from "./store/todosSlice";
+import { StyleSheet, View } from "react-native";
+import TodoList from "./components/TodoList";
 
 export default function HomeScreen() {
-  const todos = useAppSelector((state) => state.todos);
-  const dispatch = useAppDispatch();
-
-  const handleToggleTodoCompleted = (id: number) => {
-    dispatch(toggleCompleteToDo(id));
-  };
-
   return (
     <View style={s.root}>
-      {/* <Text>Home Screen</Text> */}
-      <View>
-        {todos.map((todo) => (
-          <View key={todo.id} style={s.item}>
-            <Text style={[{ flex: 1 }, todo.completed && s.completed]}>
-              {todo.text}
-            </Text>
-            <Button
-              title={todo.completed ? "Undo" : "Done"}
-              onPress={() => handleToggleTodoCompleted(todo.id)}
-            />
-          </View>
-        ))}
-      </View>
+      <TodoList />
     </View>
   );
 }
