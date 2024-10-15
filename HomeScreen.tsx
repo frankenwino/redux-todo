@@ -1,9 +1,11 @@
 import { StyleSheet, View } from "react-native";
+import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 export default function HomeScreen() {
   return (
     <View style={s.root}>
+      <TodoForm />
       <TodoList />
     </View>
   );
