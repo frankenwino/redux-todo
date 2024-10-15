@@ -1,10 +1,10 @@
-type ToDo = {
+export type Todo = {
   id: number;
   text: string;
   completed: boolean;
 };
 
-export const mockedToDos: ToDo[] = [
+export const mockedToDos: Todo[] = [
   {
     id: 1,
     text: "Buy groceries",
