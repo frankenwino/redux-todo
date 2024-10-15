@@ -1,20 +1,14 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { useAppDispatch } from "../store/hooks";
-import { addTodo } from "../store/todosSlice";
+import { addTodo } from "../store/todoActions";
 
 export default function TodoFrom() {
   const [text, setText] = useState("");
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
-    dispatch(
-      addTodo({
-        id: Date.now(),
-        text,
-        completed: false,
-      })
-    );
+    dispatch(addTodo({ text }));
     setText("");
   };
 
