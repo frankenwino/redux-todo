@@ -1,7 +1,11 @@
 import { Button, StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import { mockedToDos } from "./data";
+import { RootState } from "./store/store";
 
 export default function HomeScreen() {
+  const todos = useSelector((state: RootState) => state.todos);
+
   return (
     <View style={styles.root}>
       {/* <Text>Home Screen</Text> */}
