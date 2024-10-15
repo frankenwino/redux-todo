@@ -1,18 +1,28 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import { mockedToDos } from "./data";
-import { useAppSelector } from "./store/hooks";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { toggleCompleteToDo } from "./store/todosSlice";
 
 export default function HomeScreen() {
   const todos = useAppSelector((state) => state.todos);
+  const dispatch = useAppDispatch();
+
+  const handleToggleTodoCompleted = (id: number) => {
+    dispatch(toggleCompleteToDo(id));
+  };
 
   return (
-    <View style={styles.root}>
+    <View style={s.root}>
       {/* <Text>Home Screen</Text> */}
       <View>
-        {mockedToDos.map((toDo) => (
-          <View key={toDo.id} style={styles.item}>
-            <Text style={{ flex: 1 }}>{toDo.text}</Text>
-            <Button title="Done" />
+        {todos.map((todo) => (
+          <View key={todo.id} style={s.item}>
+            <Text style={[{ flex: 1 }, todo.completed && s.completed]}>
+              {todo.text}
+            </Text>
+            <Button
+              title={todo.completed ? "Undo" : "Done"}
+              onPress={() => handleToggleTodoCompleted(todo.id)}
+            />
           </View>
         ))}
       </View>
@@ -20,7 +30,7 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: "#fff",
@@ -34,5 +44,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     marginBottom: 16,
+  },
+  completed: {
+    textDecorationLine: "line-through",
+    color: "#bbb",
   },
 });
